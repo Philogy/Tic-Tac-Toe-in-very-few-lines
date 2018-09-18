@@ -1,10 +1,1 @@
-board, re, cases, state = [0 for i in range(9)], ' XO', ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6)), False
-for i in range(9):
-  pr = list(map(lambda x: re[x], board))
-  [pr.insert(i, '\n') for i in (6, 3)]
-  print('|'.join(pr), '\nturn:', re[i % 2 + 1])
-  board[int(input('field: ')) - 1] = i % 2 + 1
-  for x, y, z in cases:
-    if board[x] != 0 and board[x] == board[y] and board[y] == board[z]: state = not print('you won', re[i % 2 + 1])
-  if state: break
-else: print('tie')
+(lambda get_winners, set_arr, show_board, Y: print((lambda output: output+' has won' if output else 'it\'s a tie')( Y(lambda re: lambda board=[0 for i in range(9)], turn=0: ( show_board(board), print('XO'[turn], '\'s turn', sep=''), (lambda new_b: (' XO'[get_winners(new_b)], show_board(new_b))[0] if get_winners(new_b) else re(new_b, (turn+1)%2))(set_arr( board, Y(lambda re: lambda b: (lambda inp: int(inp)-1 if type(inp) == str and inp.isdecimal() and int(inp) in range(1, 10) and b[int(inp)-1] == 0 else re(b))(input('enter an unoccupied field 1-9: ')))(board), turn+1)) if 0 in board else (None, show_board(board))[0])[-1])())))( lambda b: (lambda w: w[0] if w else None)(list( filter(None, map( lambda pos: ( lambda x, y, z: b[x] if b[x] == b[y] == b[z] != 0 else None)(*pos), [ (0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6) ])))), lambda arr, i, val: arr[:i] + [val] + arr[i+1:], lambda b: ( print('\n'*50), print(''.join( (lambda b: (b, [b.insert(i, j) for i, j in ( (8, '|'), (7, '|'), (6, '\n'), (6, '-+-+-'), (6, '\n'), (5, '|'), (4, '|'), (3, '\n'), (3, '-+-+-'), (3, '\n'), (2, '|'), (1, '|'),)])[0])(list(map(lambda val: ' XO'[val], b)))))), lambda main: (lambda f: f(f))(lambda f: main(lambda *x, **y: (lambda f: f(f))(f)(*x, **y))))
